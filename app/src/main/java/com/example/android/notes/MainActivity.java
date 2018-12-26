@@ -34,13 +34,11 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        getSupportActionBar().setElevation(0);
         mNoteRecyclerView = findViewById(R.id.recyclerViewNotes);
         mNoteRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mNoteAdapter = new NoteAdapter(this, this);
         mNoteRecyclerView.setAdapter(mNoteAdapter);
         FloatingActionButton fabButton = findViewById(R.id.fab);
-//        getSupportActionBar().setTitle(Html.fromHtml("<font color='#000000'>NOTES</font>"));
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
