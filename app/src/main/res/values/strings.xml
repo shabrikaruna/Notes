@@ -3,5 +3,6 @@
     <string name="write_here">Write Here...</string>
     <string name="add">ADD</string>
     <string name="update">UPDATE</string>
-    <string name="edit_notes">EDIT NOTES</string>
+    <string name="add_note">ADD NOTE</string>
+    <string name="edit_note">EDIT NOTE</string>
 </resources>

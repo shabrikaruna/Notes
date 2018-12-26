@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setElevation(0);
+//        getSupportActionBar().setElevation(0);
         mNoteRecyclerView = findViewById(R.id.recyclerViewNotes);
         mNoteRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mNoteAdapter = new NoteAdapter(this, this);

@@ -1,29 +1,23 @@
 package com.example.android.notes;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.notes.database.AppDatabase;
@@ -31,17 +25,15 @@ import com.example.android.notes.database.NoteEntry;
 
 import java.util.Date;
 
-import static android.graphics.Color.BLACK;
-import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
-
 public class AddNoteActivity extends AppCompatActivity {
 
     public static final String EXTRA_TASK_ID = "extraTaskId";
     public static final String INSTANCE_TASK_ID = "instanceTaskId";
     private static final int DEFAULT_TASK_ID = -1;
-    private static final String TAG = AddNoteActivity.class.getSimpleName();
     private EditText mDescription;
     private ImageButton mSave;
+    private Toolbar mNoteToolbar;
+    private TextView mNoteStatus;
 
     TextWatcher watch = new TextWatcher() {
         @Override
@@ -83,8 +75,6 @@ public class AddNoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#000000'>Add Note</font>"));
-        getSupportActionBar().setElevation(0);
         initViews();
         mDb = AppDatabase.getInstance(getApplicationContext());
         mAddNoteLinearLayout = (LinearLayout) findViewById(R.id.add_activity_linear);
@@ -95,11 +85,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(EXTRA_TASK_ID)) {
-            getSupportActionBar().setTitle(R.string.edit_notes);
-            getSupportActionBar().setTitle(Html.fromHtml("<font color='#000000'>Edit Note</font>"));
-            getSupportActionBar().setElevation(0);
-
-//            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            mNoteStatus.setText(getString(R.string.edit_note));
             hideSoftKeyboard(mAddNoteLinearLayout);
             if (mTaskId == DEFAULT_TASK_ID) {
                 mTaskId = intent.getIntExtra(EXTRA_TASK_ID, DEFAULT_TASK_ID);
@@ -140,6 +126,10 @@ public class AddNoteActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        mNoteToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mNoteStatus = (TextView) findViewById(R.id.tv_status);
+        setSupportActionBar(mNoteToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mDescription = findViewById(R.id.ed_description);
         mSave = findViewById(R.id.btn_save);
         mDescription.addTextChangedListener(watch);
