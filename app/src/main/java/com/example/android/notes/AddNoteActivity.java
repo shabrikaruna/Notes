@@ -49,7 +49,7 @@ public class AddNoteActivity extends AppCompatActivity {
         public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
             mSave.setEnabled(false);
             mSave.setColorFilter(Color.argb(0, 0, 0, 0));
-            mSave.setBackgroundColor(Color.parseColor("#757575"));
+            mSave.setBackgroundColor(Color.parseColor("#a6f2d2"));
 
         }
 
@@ -62,7 +62,7 @@ public class AddNoteActivity extends AppCompatActivity {
             } else {
                 mSave.setEnabled(false);
                 mSave.setColorFilter(Color.argb(0, 0, 0, 0));
-                mSave.setBackgroundColor(Color.parseColor("#757575"));
+                mSave.setBackgroundColor(Color.parseColor("#a6f2d2"));
 
             }
         }

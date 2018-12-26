@@ -26,6 +26,7 @@
                 android:layout_marginRight="50dp"
                 android:gravity="center"
                 android:text="@string/add_note"
+                android:textColor="@android:color/black"
                 android:textSize="24sp" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
@@ -50,7 +51,7 @@
         android:layout_centerVertical="true"
         android:layout_margin="8dp"
         android:layout_weight="0.05"
-        android:background="#757575"
+        android:background="#a6f2d2"
         android:src="@drawable/ic_done_black_24dp" />
 
 
