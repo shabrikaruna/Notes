@@ -2,34 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:id="@+id/add_activity_linear"
     android:layout_height="match_parent"
     tools:context=".AddNoteActivity">
 
 
     <EditText
+        android:background="@android:color/white"
         android:id="@+id/ed_description"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:textColor="@android:color/black"
-        android:layout_weight="15"
-        android:layout_width="match_parent"
+        android:padding="16dp"
         android:hint="@string/write_here"
-        android:gravity="top"
-        android:layout_height="wrap_content" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_weight="0.5"
-    android:background="@color/colorPrimary"
-    android:gravity="center"
-    android:layout_height="wrap_content">
+        android:gravity="top" />
 
-    <Button
+    <!--<Button-->
+        <!--android:id="@+id/btn_save"-->
+        <!--android:textStyle="bold"-->
+        <!--android:background="#757575"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:drawableBottom="@drawable/ic_done_black_24dp"/>-->
+
+    <ImageButton
         android:id="@+id/btn_save"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:background="@color/colorAccent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/add" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_done_black_24dp"/>
+
 
 </LinearLayout>

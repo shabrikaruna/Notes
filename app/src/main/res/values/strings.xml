@@ -2,4 +2,6 @@
     <string name="app_name">Notes</string>
     <string name="write_here">Write Here...</string>
     <string name="add">ADD</string>
+    <string name="update">UPDATE</string>
+    <string name="edit_notes">EDIT NOTES</string>
 </resources>

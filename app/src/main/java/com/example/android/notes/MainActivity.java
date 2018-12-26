@@ -11,6 +11,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ import java.util.List;
 
 import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 
-public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemClickListener{
+public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemClickListener {
 
     private RecyclerView mNoteRecyclerView;
     private NoteAdapter mNoteAdapter;
@@ -33,22 +34,16 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setElevation(0);
         mNoteRecyclerView = findViewById(R.id.recyclerViewNotes);
         mNoteRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        mNoteAdapter = new NoteAdapter(this ,this);
+        mNoteAdapter = new NoteAdapter(this, this);
         mNoteRecyclerView.setAdapter(mNoteAdapter);
-
-//        DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(), VERTICAL);
-//        mNoteRecyclerView.addItemDecoration(decoration);
-
-
         FloatingActionButton fabButton = findViewById(R.id.fab);
-
+//        getSupportActionBar().setTitle(Html.fromHtml("<font color='#000000'>NOTES</font>"));
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Create a new intent to start an AddTaskActivity
                 Intent addTaskIntent = new Intent(MainActivity.this, AddNoteActivity.class);
                 startActivity(addTaskIntent);
             }
@@ -60,10 +55,8 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
                 return false;
             }
 
-            // Called when a user swipes left or right on a ViewHolder
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                // Here is where you'll implement swipe to delete
                 AppExecutors.getInstance().diskIO().execute(new Runnable() {
                     @Override
                     public void run() {

@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.example.android.notes.database.NoteEntry;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
@@ -39,14 +41,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     public void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i) {
         NoteEntry noteEntry = mNoteEntries.get(i);
         String description = noteEntry.getDescription();
-
-        String firstWord;
-        if(description.contains(" ")){
-            firstWord = description.substring(0, description.indexOf(" "));
-        }else{
-            firstWord = description.substring(0,10);
+        String firstWord = "Notes";
+        if (description.length() > 0 && description.contains(".")) {
+            firstWord = description.substring(0, description.indexOf("."));
         }
-
+//        else {
+//            firstWord = description.substring(0, description.indexOf(" "));
+//        }
         String updatedAt = dateFormat.format(noteEntry.getUpdatedAt());
         noteViewHolder.mNoteTitle.setText(firstWord);
         noteViewHolder.mNOteDescription.setText(description);
@@ -71,7 +72,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         notifyDataSetChanged();
     }
 
-    class NoteViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
+    class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView mNoteTitle;
         TextView mNOteDescription;
