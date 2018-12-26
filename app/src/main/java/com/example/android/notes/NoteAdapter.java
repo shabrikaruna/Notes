@@ -18,11 +18,12 @@ import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
 
-    private static final String DATE_FORMAT = "dd/MM/yyy";
+    private static final String DATE_FORMAT = "dd-MM-yyy";
     private List<NoteEntry> mNoteEntries;
     private Context mContext;
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
     final private ItemClickListener mItemClickListener;
+    private String title;
 
     public NoteAdapter(Context context, ItemClickListener listener) {
         mContext = context;
@@ -41,15 +42,16 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     public void onBindViewHolder(@NonNull NoteViewHolder noteViewHolder, int i) {
         NoteEntry noteEntry = mNoteEntries.get(i);
         String description = noteEntry.getDescription();
-        String firstWord = "Notes";
-        if (description.length() > 0 && description.contains(".")) {
-            firstWord = description.substring(0, description.indexOf("."));
+
+        if (description.contains(".")) {
+            title = description.substring(0, description.indexOf("."));
+        } else {
+            int length = description.length();
+            title = description.substring(0, length);
         }
-//        else {
-//            firstWord = description.substring(0, description.indexOf(" "));
-//        }
+
         String updatedAt = dateFormat.format(noteEntry.getUpdatedAt());
-        noteViewHolder.mNoteTitle.setText(firstWord);
+        noteViewHolder.mNoteTitle.setText(title);
         noteViewHolder.mNOteDescription.setText(description);
         noteViewHolder.mNoteDate.setText(updatedAt);
     }

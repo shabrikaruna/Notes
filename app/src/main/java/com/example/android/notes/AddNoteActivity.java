@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -41,6 +42,39 @@ public class AddNoteActivity extends AppCompatActivity {
     private static final String TAG = AddNoteActivity.class.getSimpleName();
     private EditText mDescription;
     private ImageButton mSave;
+
+    TextWatcher watch = new TextWatcher() {
+        @Override
+        public void afterTextChanged(Editable arg0) {
+            if (mDescription.getText().length() > 0) {
+                mSave.setEnabled(true);
+                mSave.setColorFilter(Color.argb(255, 255, 255, 255));
+                mSave.setBackgroundColor(Color.parseColor("#20cc85"));
+            }
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+            mSave.setEnabled(false);
+            mSave.setColorFilter(Color.argb(0, 0, 0, 0));
+            mSave.setBackgroundColor(Color.parseColor("#757575"));
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int a, int b, int c) {
+            if (mDescription.getText().length() > 0) {
+                mSave.setEnabled(true);
+                mSave.setColorFilter(Color.argb(255, 255, 255, 255));
+                mSave.setBackgroundColor(Color.parseColor("#20cc85"));
+            } else {
+                mSave.setEnabled(false);
+                mSave.setColorFilter(Color.argb(0, 0, 0, 0));
+                mSave.setBackgroundColor(Color.parseColor("#757575"));
+
+            }
+        }
+    };
     private int mTaskId = DEFAULT_TASK_ID;
     private AppDatabase mDb;
     private LinearLayout mAddNoteLinearLayout;
@@ -61,11 +95,12 @@ public class AddNoteActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(EXTRA_TASK_ID)) {
-//            mSave.setText(getString(R.string.update));
             getSupportActionBar().setTitle(R.string.edit_notes);
-            getSupportActionBar().setTitle(Html.fromHtml("<font color='#000000'>Edit notes</font>"));
+            getSupportActionBar().setTitle(Html.fromHtml("<font color='#000000'>Edit Note</font>"));
             getSupportActionBar().setElevation(0);
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+//            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            hideSoftKeyboard(mAddNoteLinearLayout);
             if (mTaskId == DEFAULT_TASK_ID) {
                 mTaskId = intent.getIntExtra(EXTRA_TASK_ID, DEFAULT_TASK_ID);
 
@@ -79,13 +114,28 @@ public class AddNoteActivity extends AppCompatActivity {
                     }
                 });
             }
+        } else {
+            showSoftKeyboard(mAddNoteLinearLayout);
         }
+    }
+
+    public void showSoftKeyboard(View view) {
+        if (view.requestFocus()) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
+    public void hideSoftKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     private void populateUI(NoteEntry note) {
         if (note == null) {
             return;
         }
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         mDescription.setText(note.getDescription());
     }
 
@@ -107,6 +157,9 @@ public class AddNoteActivity extends AppCompatActivity {
             String title = description;
             if (title.contains(".")) {
                 title = title.substring(0, title.indexOf("."));
+            } else {
+                int length = description.length();
+                title = title.substring(0, length);
             }
             Date date = new Date();
             final NoteEntry note = new NoteEntry(title, description, date);
@@ -123,44 +176,7 @@ public class AddNoteActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Toast.makeText(AddNoteActivity.this, "Enter the note to save!", Toast.LENGTH_LONG).show();
+            Toast.makeText(AddNoteActivity.this, "Enter the note to save !", Toast.LENGTH_LONG).show();
         }
     }
-
-    TextWatcher watch = new TextWatcher() {
-        @Override
-        public void afterTextChanged(Editable arg0) {
-            if (mDescription.getText().length() > 0) {
-                mSave.setEnabled(true);
-//                mSave.setTextColor(Color.parseColor("#FFFFFF"));
-                mSave.setColorFilter(Color.argb(255, 255, 255, 255));
-                mSave.setBackgroundColor(Color.parseColor("#4CAF50"));
-            }
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-            mSave.setEnabled(false);
-//            mSave.setTextColor(Color.parseColor("#000000"));
-            mSave.setColorFilter(Color.argb(0, 0, 0, 0));
-            mSave.setBackgroundColor(Color.parseColor("#757575"));
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int a, int b, int c) {
-            if (mDescription.getText().length() > 0) {
-                mSave.setEnabled(true);
-//                mSave.setTextColor(Color.parseColor("#FFFFFF"));
-                mSave.setColorFilter(Color.argb(255, 255, 255, 255));
-                mSave.setBackgroundColor(Color.parseColor("#4CAF50"));
-            } else {
-                mSave.setEnabled(false);
-//                mSave.setTextColor(Color.parseColor("#000000"));
-                mSave.setColorFilter(Color.argb(0, 0, 0, 0));
-                mSave.setBackgroundColor(Color.parseColor("#757575"));
-
-            }
-        }
-    };
 }

@@ -1,40 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
     android:id="@+id/add_activity_linear"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical"
     tools:context=".AddNoteActivity">
 
 
     <EditText
-        android:background="@android:color/white"
         android:id="@+id/ed_description"
-        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:textColor="@android:color/black"
-        android:padding="16dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:gravity="top"
         android:hint="@string/write_here"
-        android:gravity="top" />
-
-    <!--<Button-->
-        <!--android:id="@+id/btn_save"-->
-        <!--android:textStyle="bold"-->
-        <!--android:background="#757575"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:drawableBottom="@drawable/ic_done_black_24dp"/>-->
+        android:padding="16dp"
+        android:textColor="@android:color/black" />
 
     <ImageButton
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_done_black_24dp"/>
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp"
+        android:layout_weight="0.05"
+        android:background="#757575"
+        android:src="@drawable/ic_done_black_24dp" />
 
 
 </LinearLayout>
