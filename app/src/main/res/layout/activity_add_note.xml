@@ -38,6 +38,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@android:color/white"
+        android:cursorVisible="false"
         android:gravity="top"
         android:hint="@string/write_here"
         android:padding="16dp"
@@ -49,9 +50,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        android:layout_weight="0.05"
-        android:background="#a6f2d2"
+        android:layout_margin="16dp"
+        android:layout_weight="0.04"
+        android:background="@drawable/roundcorner"
         android:src="@drawable/ic_done_black_24dp" />
 
 

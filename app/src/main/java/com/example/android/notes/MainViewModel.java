@@ -20,6 +20,7 @@ public class MainViewModel extends AndroidViewModel {
 
         notes = database.noteDao().getAllNotes();
     }
+
     public LiveData<List<NoteEntry>> getTasks() {
         return notes;
     }

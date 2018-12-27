@@ -3,31 +3,27 @@ package com.example.android.notes;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.text.Html;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.android.notes.database.AppDatabase;
 import com.example.android.notes.database.NoteEntry;
 
 import java.util.List;
 
-import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
-
 public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemClickListener {
 
     private RecyclerView mNoteRecyclerView;
     private NoteAdapter mNoteAdapter;
     private AppDatabase mDb;
+    private TextView mNoNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
         mNoteRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mNoteAdapter = new NoteAdapter(this, this);
         mNoteRecyclerView.setAdapter(mNoteAdapter);
+
+        mNoNotes = (TextView) findViewById(R.id.tv_no_notes);
         FloatingActionButton fabButton = findViewById(R.id.fab);
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +72,13 @@ public class MainActivity extends AppCompatActivity implements NoteAdapter.ItemC
         viewModel.getTasks().observe(this, new Observer<List<NoteEntry>>() {
             @Override
             public void onChanged(@Nullable List<NoteEntry> noteEntries) {
-                mNoteAdapter.setTasks(noteEntries);
+
+                if (noteEntries.size() > 0) {
+                    mNoNotes.setVisibility(View.INVISIBLE);
+                    mNoteAdapter.setTasks(noteEntries);
+                } else {
+                    mNoNotes.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

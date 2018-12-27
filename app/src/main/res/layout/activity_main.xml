@@ -26,24 +26,37 @@
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewNotes"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@android:color/white"
-        android:clipToPadding="false"
-        android:paddingBottom="80dp" />
+        android:layout_height="match_parent">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewNotes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:clipToPadding="false"
+            android:paddingBottom="80dp" />
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/colorFloatingBar"
-        android:tint="@android:color/white"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        <TextView
+            android:id="@+id/tv_no_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_notes"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:visibility="invisible" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/colorFloatingBar"
+            android:tint="@android:color/white"
+            app:srcCompat="@android:drawable/ic_input_add" />
+    </FrameLayout>
 
 </LinearLayout>

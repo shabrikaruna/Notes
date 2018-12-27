@@ -5,9 +5,9 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,9 +32,6 @@ public class AddNoteActivity extends AppCompatActivity {
     private static final int DEFAULT_TASK_ID = -1;
     private EditText mDescription;
     private ImageButton mSave;
-    private Toolbar mNoteToolbar;
-    private TextView mNoteStatus;
-
     TextWatcher watch = new TextWatcher() {
         @Override
         public void afterTextChanged(Editable arg0) {
@@ -48,25 +45,28 @@ public class AddNoteActivity extends AppCompatActivity {
         @Override
         public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
             mSave.setEnabled(false);
-            mSave.setColorFilter(Color.argb(0, 0, 0, 0));
-            mSave.setBackgroundColor(Color.parseColor("#a6f2d2"));
-
+            mSave.setColorFilter(Color.argb(255, 255, 255, 255));
+            mSave.setBackgroundColor(Color.parseColor("#CCCCCC"));
         }
 
         @Override
         public void onTextChanged(CharSequence s, int a, int b, int c) {
+            mDescription.setSelection(mDescription.length());
+            mDescription.setCursorVisible(true);
             if (mDescription.getText().length() > 0) {
                 mSave.setEnabled(true);
                 mSave.setColorFilter(Color.argb(255, 255, 255, 255));
                 mSave.setBackgroundColor(Color.parseColor("#20cc85"));
             } else {
+                mDescription.setCursorVisible(false);
                 mSave.setEnabled(false);
-                mSave.setColorFilter(Color.argb(0, 0, 0, 0));
-                mSave.setBackgroundColor(Color.parseColor("#a6f2d2"));
-
+                mSave.setColorFilter(Color.argb(255, 255, 255, 255));
+                mSave.setBackgroundColor(Color.parseColor("#CCCCCC"));
             }
         }
     };
+    private Toolbar mNoteToolbar;
+    private TextView mNoteStatus;
     private int mTaskId = DEFAULT_TASK_ID;
     private AppDatabase mDb;
     private LinearLayout mAddNoteLinearLayout;
@@ -132,6 +132,7 @@ public class AddNoteActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mDescription = findViewById(R.id.ed_description);
         mSave = findViewById(R.id.btn_save);
+        mSave.setEnabled(false);
         mDescription.addTextChangedListener(watch);
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override

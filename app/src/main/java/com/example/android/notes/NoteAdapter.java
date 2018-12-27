@@ -14,15 +14,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
-
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
 
     private static final String DATE_FORMAT = "dd-MM-yyy";
+    final private ItemClickListener mItemClickListener;
     private List<NoteEntry> mNoteEntries;
     private Context mContext;
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
-    final private ItemClickListener mItemClickListener;
     private String title;
 
     public NoteAdapter(Context context, ItemClickListener listener) {
@@ -58,11 +56,11 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     @Override
     public int getItemCount() {
-        return mNoteEntries == null ? 0 : mNoteEntries.size();
-    }
-
-    public interface ItemClickListener {
-        void onItemClickListener(int itemId);
+        if (mNoteEntries == null) {
+            return 0;
+        } else {
+            return mNoteEntries.size();
+        }
     }
 
     public List<NoteEntry> getTasks() {
@@ -72,6 +70,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     public void setTasks(List<NoteEntry> noteEntries) {
         mNoteEntries = noteEntries;
         notifyDataSetChanged();
+    }
+
+    public interface ItemClickListener {
+        void onItemClickListener(int itemId);
     }
 
     class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

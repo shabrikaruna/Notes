@@ -3,7 +3,6 @@ package com.example.android.notes;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.example.android.notes.AddNoteViewModel;
 import com.example.android.notes.database.AppDatabase;
 
 public class AddNoteViewModelFactory extends ViewModelProvider.NewInstanceFactory {
