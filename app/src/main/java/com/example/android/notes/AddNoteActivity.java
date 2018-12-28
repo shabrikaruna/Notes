@@ -30,9 +30,16 @@ public class AddNoteActivity extends AppCompatActivity {
     public static final String EXTRA_TASK_ID = "extraTaskId";
     public static final String INSTANCE_TASK_ID = "instanceTaskId";
     private static final int DEFAULT_TASK_ID = -1;
+
     private EditText mDescription;
     private ImageButton mSave;
-    TextWatcher watch = new TextWatcher() {
+    private Toolbar mNoteToolbar;
+    private TextView mNoteStatus;
+    private int mTaskId = DEFAULT_TASK_ID;
+    private AppDatabase mDb;
+    private LinearLayout mAddNoteLinearLayout;
+
+    private TextWatcher watch = new TextWatcher() {
         @Override
         public void afterTextChanged(Editable arg0) {
             if (mDescription.getText().length() > 0) {
@@ -65,17 +72,14 @@ public class AddNoteActivity extends AppCompatActivity {
             }
         }
     };
-    private Toolbar mNoteToolbar;
-    private TextView mNoteStatus;
-    private int mTaskId = DEFAULT_TASK_ID;
-    private AppDatabase mDb;
-    private LinearLayout mAddNoteLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
+
         initViews();
+
         mDb = AppDatabase.getInstance(getApplicationContext());
         mAddNoteLinearLayout = (LinearLayout) findViewById(R.id.add_activity_linear);
 
@@ -128,8 +132,10 @@ public class AddNoteActivity extends AppCompatActivity {
     private void initViews() {
         mNoteToolbar = (Toolbar) findViewById(R.id.toolbar);
         mNoteStatus = (TextView) findViewById(R.id.tv_status);
+
         setSupportActionBar(mNoteToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mDescription = findViewById(R.id.ed_description);
         mSave = findViewById(R.id.btn_save);
         mSave.setEnabled(false);
@@ -167,7 +173,7 @@ public class AddNoteActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Toast.makeText(AddNoteActivity.this, "Enter the note to save !", Toast.LENGTH_LONG).show();
+            Toast.makeText(AddNoteActivity.this, getString(R.string.enter_the_note_to_Save), Toast.LENGTH_LONG).show();
         }
     }
 }

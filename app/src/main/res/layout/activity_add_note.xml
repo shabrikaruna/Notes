@@ -15,20 +15,14 @@
         android:layout_gravity="center"
         android:background="@color/color_white">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tv_status"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="50dp"
-                android:gravity="center"
-                android:text="@string/add_note"
-                android:textColor="@android:color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/add_note"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_24sp" />
     </android.support.v7.widget.Toolbar>
 
 
@@ -41,17 +35,15 @@
         android:cursorVisible="false"
         android:gravity="top"
         android:hint="@string/write_here"
-        android:padding="16dp"
+        android:padding="@dimen/padding_16dp"
         android:textColor="@android:color/black" />
 
     <ImageButton
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="16dp"
-        android:layout_weight="0.04"
+        android:layout_margin="@dimen/margin_8dp"
+        android:padding="@dimen/padding_8dp"
         android:background="@drawable/roundcorner"
         android:src="@drawable/ic_done_black_24dp" />
 

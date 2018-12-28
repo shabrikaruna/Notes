@@ -6,24 +6,18 @@
     android:background="@color/color_white"
     android:orientation="vertical">
 
-
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_white">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/notes"
-                android:textColor="@android:color/black"
-                android:textSize="24sp" />
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/notes"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_24sp" />
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout
@@ -36,7 +30,7 @@
             android:layout_height="match_parent"
             android:background="@android:color/white"
             android:clipToPadding="false"
-            android:paddingBottom="80dp" />
+            android:paddingBottom="@dimen/padding_bottom_80dp" />
 
         <TextView
             android:id="@+id/tv_no_notes"
@@ -45,15 +39,15 @@
             android:layout_gravity="center"
             android:text="@string/no_notes"
             android:textColor="@android:color/black"
-            android:textSize="24sp"
-            android:visibility="invisible" />
+            android:textSize="@dimen/text_size_24sp"
+            android:visibility="gone" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/margin_16dp"
             android:backgroundTint="@color/colorFloatingBar"
             android:tint="@android:color/white"
             app:srcCompat="@android:drawable/ic_input_add" />
